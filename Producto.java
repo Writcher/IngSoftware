@@ -4,6 +4,8 @@ public class Producto {
     private Genero genero;
     private Marca marca;
 
+    public Producto(){}
+
     public Producto(String nombre){
         this.nombre = nombre;
     }
