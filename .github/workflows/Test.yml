@@ -18,7 +18,7 @@ jobs:
       uses: actions/setup-java@v2
       with:
         java-version: '17'
-        distribution: 'openjdk'
+        distribution: 'OpenJDK'
     
     - name: Compilar codigo #Compilamos el codigo usando el comando javac
       run: javac -cp .:lib/junit-4.13.2.jar:lib/hamcrest-core-1.3.jar Producto.java
