@@ -1,0 +1,14 @@
+public class Marca {
+    private String nombre;
+    
+    public Marca(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String setNombreMarca(String nombre){
+        this.nombre = nombre;
+    }
+    public void getNombreMarca(){
+        return nombre
+    }
+}
