@@ -1,0 +1,29 @@
+name: test
+on:
+  workflow_dispatch:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Copiar codigo #consigue una copia del codigo del repositorio sobre la cual trabajar en el workflow
+      uses: actions/checkout@v2
+    
+    - name: Preparar JDK #Prepara el Java Development Kit
+      uses: actions/setup-java@v2
+      with:
+        java-version: '17'
+    
+    - name: Compilar codigo #Compilamos el codigo usando el comando javac
+      run: javac -cp .:lib/junit-4.13.2.jar:lib/hamcrest-core-1.3.jar Producto.java
+    
+    - name: Ejecutar las pruebas #Ejecutamos las pruebas unitarias de la clase JavaTest.java
+      run: java -cp .:lib/junit-4.13.2.jar:lib/hamcrest-core-1.3.jar org.junit.runner.JUnitCore JavaTest.java
+      
+    - name: Mensaje de Listo
+      run: echo "Listas las pruebas maestro!"
