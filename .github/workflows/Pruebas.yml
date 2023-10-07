@@ -34,30 +34,28 @@ jobs:
   checkstyle:
     runs-on: ubuntu-latest
 
+    #steps:
+   # - name: Copiar codigo
+    #  uses: actions/checkout@v2
+
+   # - name: Preparar JDK
+      #uses: actions/setup-java@v2
+     # with:
+      #  java-version: '17'
+     #   distribution: 'temurin'
+    #checkstyle:
+   # runs-on: ubuntu-latest
+
     steps:
-    - name: Copiar codigo
+    - name: Checkout code
       uses: actions/checkout@v2
 
-    - name: Preparar JDK
-      uses: actions/setup-java@v2
+    - name: Run Checkstyle
+      uses: checkstyle/checkstyle-action@v3
       with:
-        java-version: '17'
-        distribution: 'temurin'
-        
-    - name: Debug
-      run: |
-        echo "Contents of lib directory:"
-        ls -l ./lib
-        echo "Contents of checkstyle directory:"
-        ls -l ./checkstyle
-
-    - name: Set File Permissions
-      run: |
-        chmod +x ./lib/checkstyle-10.12.4-all.jar
-        chmod +r ./checkstyle/checkstyle.xml
-        
-    - name: Ejecutar Checkstyle
-      run: |
-        find . -name "*.java" -exec java -jar "./lib/checkstyle-10.12.4-all.jar" -c "./checkstyle/checkstyle.xml" {} \;
+        config: ./checkstyle/checkstyle.xml
+   # - name: Ejecutar Checkstyle
+    #  run: |
+     #   find . -name "*.java" -exec java -jar "./lib/checkstyle-10.12.4-all.jar" -c "./checkstyle/checkstyle.xml" {} \;
 #  chmod +x ./checkstyle/run_checkstyle.sh
 #./checkstyle/run_checkstyle.sh
