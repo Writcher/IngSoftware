@@ -1,0 +1,51 @@
+name: Pruebas
+on:
+  workflow_dispatch: #Esto nos permite ejecutar el workflow desde el menu actions de github.
+  push:              #Ejecuta el workflow cuando se hace un push en la branch main.
+    branches:
+      - main  
+  pull_request:      #Ejecuta el workflow cuando se hace un pull request de la branch main.
+    branches:
+      - main         
+
+jobs:
+  utesting:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Copiar codigo #Procura una copia del codigo que se encuentra en el repositorio sobre la cual trabajar en el workflow.
+      uses: actions/checkout@v2
+    
+    - name: Preparar JDK #Prepara el Java Development Kit a utilizar para las pruebas.
+      uses: actions/setup-java@v2
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+    
+    - name: Compilar codigo #Compila el codigo usando el comando javac.
+      run: javac -cp .:lib/junit-4.13.2.jar:lib/hamcrest-core-1.3.jar JavaTest.java
+    
+    - name: Ejecutar las pruebas #Ejecuta las pruebas unitarias de la clase JavaTest.
+      run: java -cp .:lib/junit-4.13.2.jar:lib/hamcrest-core-1.3.jar org.junit.runner.JUnitCore JavaTest
+      
+    - name: Mensaje de Listo 
+      run: echo "Listas las pruebas maestro!!"
+#A partir de aca es nuevo
+  checkstyle:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Copiar codigo
+      uses: actions/checkout@v2
+
+    - name: Preparar JDK
+      uses: actions/setup-java@v2
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+
+    - name: Ejecutar Checkstyle
+      run: |
+        chmod +x checkstyle/run_checkstyle.sh
+        ./checkstyle/run_checkstyle.sh *.java
+      working-directory: ${{ github.workspace }}
