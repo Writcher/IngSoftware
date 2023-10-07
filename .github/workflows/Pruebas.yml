@@ -46,4 +46,4 @@ jobs:
 
     - name: Ejecutar Checkstyle
       run: 
-        java -jar .:lib/checkstyle-10.12.4-all.jar -c .:checkstyle/checkstyle.xml ${{ github.workspace }}
+        java -jar lib/checkstyle-10.12.4-all.jar -c checkstyle/checkstyle.xml ${{ github.workspace }}
