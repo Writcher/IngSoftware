@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<module name="Checker">
+    <property name="severity" value="warning"/>
+    <module name="TreeWalker">
+        <module name="JavadocType">     <!--Verifica la documentacion de las clases-->
+            <property name="scope" value="Public"/>     <!--Esta linea establece que solo se pueden verificar las claces publicas-->
+            <property name="allowMissingJavadoc" value="false"/>     <!--Esta linea establece que las clases tienen que tener comentario Javadoc-->
+        </module>
+        <module name="EmptyBlock">     <!--Verifica bloques de codigo vacio-->
+            <property name="option" value="TEXT"/>     <!--Indica que un bloque se considera vacio si sol tiene comentarios o espacio en blanco-->
+            <property name="severity" value="warning"/>     <!--Indica que si detecta un bloque vacio debe generar una advertencia-->
+        </module>
+        <!--Aca se agregan mas modulos que verifiquen otras cosas. Para saber que modulos hay disponible ir a "checkstyle.sourceforge.io"-->
+    </module>
+</module>
