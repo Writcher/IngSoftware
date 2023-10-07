@@ -43,7 +43,12 @@ jobs:
       with:
         java-version: '17'
         distribution: 'temurin'
-
+    - name: Debug
+      run: |
+        echo "Contents of lib directory:"
+        ls -l ./lib
+        echo "Contents of checkstyle directory:"
+        ls -l ./checkstyle
     - name: Ejecutar Checkstyle
       run: |
         find . -name "*.java" -exec java -jar ./lib/checkstyle-10.12.4-all.jar -c ./checkstyle/checkstyle.xml {} \;
