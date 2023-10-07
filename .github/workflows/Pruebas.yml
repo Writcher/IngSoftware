@@ -34,27 +34,19 @@ jobs:
   checkstyle:
     runs-on: ubuntu-latest
 
-    #steps:
-      #- name: Copiar codigo
-        #uses: actions/checkout@v2
-
-     #- name: Preparar JDK
-       #uses: actions/setup-java@v2
-       #with:
-         #java-version: '17'
-         #distribution: 'temurin'
-
     steps:
-      - uses: actions/checkout@v4
-      - uses: dbelyaev/action-checkstyle@v0.9.5
+      - name: Copiar codigo
+        uses: actions/checkout@v2
+
+      - name: Preparar JDK
+        uses: actions/setup-java@v2
         with:
-          github_token: ${{ secrets.github_token }}
-          reporter: github-pr-review
-          level: warning
-          checkstyle_config: ./checkstyle/checkstyle0.xml
+          java-version: '17'
+          distribution: 'temurin'
           
-   # - name: Ejecutar Checkstyle
-    #  run: |
-     #   find . -name "*.java" -exec java -jar "./lib/checkstyle-10.12.4-all.jar" -c "./checkstyle/checkstyle.xml" {} \;
-#  chmod +x ./checkstyle/run_checkstyle.sh
-#./checkstyle/run_checkstyle.sh
+      - name: Ejecutar Checkstyle
+        run: |
+          chmod +x ./checkstyle/run_checkstyle.sh
+          ./checkstyle/run_checkstyle.sh
+
+# find . -name "*.java" -exec java -jar "./lib/checkstyle-10.12.4-all.jar" -c "./checkstyle/checkstyle.xml" {} \;
