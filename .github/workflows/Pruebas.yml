@@ -46,5 +46,6 @@ jobs:
 
     - name: Ejecutar Checkstyle
       run: |
-        chmod +x ./run_checkstyle.sh
-        ./run_checkstyle.sh
+        find . -name "*.java" -exec java -jar ./lib/checkstyle-10.12.4-all.jar -c ./checkstyle/checkstyle.xml {} \;
+#  chmod +x ./checkstyle/run_checkstyle.sh
+#./checkstyle/run_checkstyle.sh
