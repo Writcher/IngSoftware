@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE module PUBLIC "-//Puppy Crawl//DTD Check Configuration 10.12.4//EN" "http://checkstyle.sourceforge.net/dtds/configuration_10_12_4.dtd">
 <module name="Checker">
-    <property name="severity" value="warning"/>
     <module name="TreeWalker">
         <module name="JavadocType">     <!--Verifica la documentacion de las clases-->
             <property name="scope" value="Public"/>     <!--Esta linea establece que solo se pueden verificar las claces publicas-->
