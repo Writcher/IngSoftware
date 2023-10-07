@@ -5,7 +5,7 @@ public class Main {
         int x = 10;
 
         //Bloque if vacio para probar Checkstyle
-        if(x>5) {
-        }
+        //if(x>5) {
+        //}
     }
 }
