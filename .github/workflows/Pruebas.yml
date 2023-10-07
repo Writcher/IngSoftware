@@ -53,10 +53,8 @@ jobs:
     runs-on: ubuntu-latest
       
     steps: 
-      - uses: actions/checkout@v3 # v2 minimum required
-      - uses: axel-op/googlejavaformat-action@v3
-        with:
-          args: "--replace"
-          skip-commit: true
-      - name: Print diffs
-        run: git --no-pager diff --exit-code
+     - uses: actions/checkout@v3 # v2 minimum required
+     - uses: axel-op/googlejavaformat-action@v3
+       with:
+           args: "--skip-sorting-imports --replace"
+           github-token: ${{ secrets.GITHUB_TOKEN }}
