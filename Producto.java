@@ -1,4 +1,3 @@
-/** Este es un comentario de ejemplo Javadoc para probar Checkstyle */
 public class Producto {
     private String nombre;
     private double precio;

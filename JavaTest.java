@@ -1,7 +1,6 @@
 import static org.junit.Assert.*;
 import org.junit.Test;
 
-/** Este es un comentario de ejemplo Javadoc para probar Checkstyle */
 public class JavaTest {
     @Test
     public void testNombreProducto() {
