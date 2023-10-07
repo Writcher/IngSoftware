@@ -46,6 +46,6 @@ jobs:
 
     - name: Ejecutar Checkstyle
       run: |
-        chmod +x checkstyle/run_checkstyle.sh
-        ./checkstyle/run_checkstyle.sh *.java
+        chmod +x .:checkstyle/run_checkstyle.sh
+        .:checkstyle/run_checkstyle.sh *.java
       working-directory: ${{ github.workspace }}
