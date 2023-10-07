@@ -48,5 +48,23 @@ jobs:
         run: |
           chmod +x ./checkstyle/run_checkstyle.sh
           ./checkstyle/run_checkstyle.sh
+#Hasta aca anda!
+  checkformat:
+    runs-on: ubuntu-latest
+      
+    steps: 
+      - name: Copiar codigo
+        uses: actions/checkout@v2
 
-# find . -name "*.java" -exec java -jar "./lib/checkstyle-10.12.4-all.jar" -c "./checkstyle/checkstyle.xml" {} \;
+      - name: Preparar JDK
+        uses: actions/setup-java@v2
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Instalar Prettier
+        run: npm install --global prettier
+
+      - name: Verificar formato del código
+        run: |
+          find . -name "*.java" | xargs prettier --check
