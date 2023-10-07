@@ -45,5 +45,6 @@ jobs:
         distribution: 'temurin'
 
     - name: Ejecutar Checkstyle
-      run: 
-        java -jar lib/checkstyle-10.12.4-all.jar -c checkstyle/checkstyle.xml ${{ github.workspace }}
+      run: |
+        chmod +x ./checkstyle/run_checkstyle.sh
+        ./checkstyle/run_checkstyle.sh
