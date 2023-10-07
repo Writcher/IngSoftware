@@ -6,8 +6,6 @@ public class Main {
 
         //Bloque if vacio para probar Checkstyle
         if(x>5) {
-            //Comentario
-            //Comentario
         }
     }
 }
