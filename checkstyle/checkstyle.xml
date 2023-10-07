@@ -1,16 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE module PUBLIC "-//Puppy Crawl//DTD Check Configuration 10.12.4//EN" "http://checkstyle.sourceforge.net/dtds/configuration_10_12_4.dtd">
 <module name="Checker">
-    <property name="severity" value="warning"/>
+    <property name="fileExtensions" value="java"/>
+
     <module name="TreeWalker">
-        <module name="JavadocType">     <!--Verifica la documentacion de las clases-->
-            <property name="scope" value="Public"/>     <!--Esta linea establece que solo se pueden verificar las claces publicas-->
-            <property name="allowMissingJavadoc" value="false"/>     <!--Esta linea establece que las clases tienen que tener comentario Javadoc-->
+        <!-- Ensure that there are no tab characters in the code -->
+        <module name="RegexpSingleline">
+            <property name="format" value="^\t"/>
+            <property name="message" value="Avoid using tabs; use spaces instead."/>
         </module>
-        <module name="EmptyBlock">     <!--Verifica bloques de codigo vacio-->
-            <property name="option" value="TEXT"/>     <!--Indica que un bloque se considera vacio si sol tiene comentarios o espacio en blanco-->
-            <property name="severity" value="warning"/>     <!--Indica que si detecta un bloque vacio debe generar una advertencia-->
+
+        <!-- Ensure that lines do not exceed 120 characters -->
+        <module name="LineLength">
+            <property name="max" value="120"/>
+            <property name="ignorePattern" value="^package .*"/>
         </module>
-        <!--Aca se agregan mas modulos que verifiquen otras cosas. Para saber que modulos hay disponible ir a "checkstyle.sourceforge.io"-->
+
+        <!-- Ensure proper indentation (4 spaces) -->
+        <module name="Indentation">
+            <property name="basicOffset" value="4"/>
+        </module>
     </module>
 </module>
