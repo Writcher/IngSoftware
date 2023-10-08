@@ -11,8 +11,19 @@ on:
       - main
 
 jobs:
+  checkformat:
+    runs-on: ubuntu-latest
+    steps: 
+      - uses: actions/checkout@v3 # v2 minimum required
+      - uses: axel-op/googlejavaformat-action@v3             
+        with:                                                
+          args: "--skip-sorting-imports --replace"     
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          
   utesting:
     runs-on: ubuntu-latest
+    needs:
+    - checkformat
     steps:
     - name: Copiar codigo #Procura una copia del codigo que se encuentra en el repositorio sobre la cual trabajar en el workflow.
       uses: actions/checkout@v2
@@ -28,30 +39,25 @@ jobs:
 
   checkstyle:
     runs-on: ubuntu-latest
+    needs:
+    - checkformat
     steps:
-      - name: Copiar codigo
-        uses: actions/checkout@v2
-      - name: Preparar JDK
-        uses: actions/setup-java@v2
-        with:
-          java-version: '17'
-          distribution: 'temurin'
-      - name: Ejecutar Checkstyle     #Ejecuta checkstyle con el script run_checkstyle.sh (No es completamente necesario hacer un script, pero
-        run: |                        #ya lo habia escrito antes de darme cuenta por lo que lo use de todas formas, pa no desperdiciar
-          chmod +x ./checkstyle/run_checkstyle.sh
-          ./checkstyle/run_checkstyle.sh
+    - name: Copiar codigo
+      uses: actions/checkout@v2
+    - name: Preparar JDK
+      uses: actions/setup-java@v2
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+    - name: Ejecutar Checkstyle     #Ejecuta checkstyle con el script run_checkstyle.sh (No es completamente necesario hacer un script, pero
+      run: |                        #ya lo habia escrito antes de darme cuenta por lo que lo use de todas formas, pa no desperdiciar
+        chmod +x ./checkstyle/run_checkstyle.sh
+        ./checkstyle/run_checkstyle.sh
 
-  checkformat:
-    runs-on: ubuntu-latest
-    steps: 
-      - uses: actions/checkout@v3 # v2 minimum required
-      - uses: axel-op/googlejavaformat-action@v3             
-        with:                                                
-          args: "--skip-sorting-imports --replace"     
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-#Hasta aca anda!
   build:
     runs-on: ubuntu-latest
+    needs:
+      - checkformat
     steps:
       - name: Copiar codigo
         uses: actions/checkout@v2
@@ -64,19 +70,3 @@ jobs:
         run: javac Main.java
       - name: Ejecutar codigo
         run: java Main
-      
-  commit:
-    needs: checkformat
-    runs-on: ubuntu-latest
-    steps:
-        - uses: actions/checkout@v3
-        - name: Resetear Cambios
-          run: git reset --hard HEAD
-        - name: Commit Cambios de Formato
-          run: |
-            git config user.name "Writcher"
-            git config user.email "joaquingim77@gmail.com"
-            git commit -a -m "Cambios de Formato"
-        - name: Push Cambios de Formato
-          run: git push origin HEAD:main
-
