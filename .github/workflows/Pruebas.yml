@@ -49,7 +49,7 @@ jobs:
         with:                                                
           args: "--skip-sorting-imports --replace"     
           github-token: ${{ secrets.GITHUB_TOKEN }}
-#Hasta aca anda!
+  
   build:
     runs-on: ubuntu-latest
     steps:
@@ -64,19 +64,4 @@ jobs:
         run: javac Main.java
       - name: Ejecutar codigo
         run: java Main
-      
-  commit:
-    needs: checkformat
-    runs-on: ubuntu-latest
-    steps:
-        - uses: actions/checkout@v3
-        - name: Resetear Cambios
-          run: git reset --hard HEAD
-        - name: Commit Cambios de Formato
-          run: |
-            git config user.name "Writcher"
-            git config user.email "joaquingim77@gmail.com"
-            git commit -a -m "Cambios de Formato"
-        - name: Push Cambios de Formato
-          run: git push origin HEAD:main
 
