@@ -59,9 +59,10 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
       - name: Debug Info
-        run: |
-          ls
+        run: ls
       - name: Compilar codigo
         run: javac Main.java
+        working-directory: ${{ github.workspace }}
       - name: Ejecutar codigo
         run: java Main
+        working-directory: ${{ github.workspace }}
