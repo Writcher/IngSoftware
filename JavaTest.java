@@ -9,7 +9,6 @@ public class JavaTest {
     assertNotNull(nombre);
     assertFalse(nombre.isEmpty());
   }
-  
   public void testPrecioProducto() {
     Producto producto = new Producto();
     producto.setPrecioProducto(10.0);
