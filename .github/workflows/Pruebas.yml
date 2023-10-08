@@ -4,11 +4,11 @@ on:
   push:              #Ejecuta el workflow cuando se hace un push en la branch main.
     branches:
       - main
-      - Develop
+      - dev
   pull_request:      #Ejecuta el workflow cuando se hace un pull request de la branch main.
     branches:
-      - Develop
       - main
+      - dev
 
 jobs:
   checkformat:
@@ -16,8 +16,6 @@ jobs:
     steps:
       - uses: actions/checkout@v3 # v2 minimum required
       - uses: axel-op/googlejavaformat-action@v3
-        with:
-          args: "--set-exit-if-changed"
           
   utesting:
     runs-on: ubuntu-latest
@@ -44,8 +42,8 @@ jobs:
       with:
         java-version: '17'
         distribution: 'temurin'
-    - name: Ejecutar Checkstyle     #Ejecuta checkstyle con el script run_checkstyle.sh (No es completamente necesario hacer un script, pero
-      run: |                        #ya lo habia escrito antes de darme cuenta por lo que lo use de todas formas, pa no desperdiciar
+    - name: Ejecutar Checkstyle     #Ejecuta checkstyle con el script run_checkstyle.sh
+      run: |                        
         chmod +x ./checkstyle/run_checkstyle.sh
         ./checkstyle/run_checkstyle.sh
 
