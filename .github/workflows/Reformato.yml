@@ -1,4 +1,4 @@
-name: Pruebas
+name: Reformato
 on:
   workflow_dispatch: #Esto nos permite ejecutar el workflow desde el menu actions de github.
 
