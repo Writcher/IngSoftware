@@ -53,17 +53,15 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      - name: Copiar codigo
+        uses: actions/checkout@v2
       - name: Preparar JDK
         uses: actions/setup-java@v2
         with:
           java-version: '17'
           distribution: 'temurin'
-      - name: Debug Info
-        run: ls
-        working-directory: ${{ github.workspace }}
       - name: Compilar codigo
         run: javac Main.java
-        working-directory: ${{ github.workspace }}
       - name: Ejecutar codigo
         run: java Main
-        working-directory: ${{ github.workspace }}
+
