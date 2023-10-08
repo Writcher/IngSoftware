@@ -1,6 +1,11 @@
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 public class Producto {
   private String nombre;
   private double precio;
+  private double precio_usd;
   private Genero genero;
   private Marca marca;
 
@@ -26,12 +31,21 @@ public class Producto {
     return marca;
   }
 
-  public void setPrecioProducto(double precio) {
+  public void setPrecioProducto(double precio) throws Exception {
     this.precio = precio;
+    
+    //Setear en USD
+    ConvertirUSD convertidor = new ConvertirUSD();
+    precio_usd = convertidor.convertirARSaUSD(precio);
+    this.precio_usd = precio_usd;
   }
 
   public double getPrecioProducto() {
     return precio;
+  }
+  
+  public double getPrecioUSDProducto() {
+    return precio_usd;
   }
 
   public void setNombreProducto(String nombre) {
