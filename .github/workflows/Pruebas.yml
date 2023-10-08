@@ -1,12 +1,12 @@
 name: Pruebas
 on:
   workflow_dispatch: #Esto nos permite ejecutar el workflow desde el menu actions de github.
-  push:              #Ejecuta el workflow cuando se hace un push en la branch main.
-    branches:
-      - main  
+  #push:              #Ejecuta el workflow cuando se hace un push en la branch main.
+    #branches:
+      #- main  
   pull_request:      #Ejecuta el workflow cuando se hace un pull request de la branch main.
     branches:
-      - main         
+      - Develop         
 
 jobs:
   utesting:
