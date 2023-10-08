@@ -8,7 +8,6 @@ public class Marca {
   public void setNombreMarca(String nombre) {
     this.nombre = nombre;
   }
-
   public String getNombreMarca() {
     return nombre;
   }
