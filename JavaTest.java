@@ -10,7 +10,7 @@ public class JavaTest {
     assertFalse(nombre.isEmpty());
   }
 
-  public void testPrecioProducto() {
+  public void testPrecioProducto() {∫
     Producto producto = new Producto();
     producto.setPrecioProducto(10.0);
     double precio = producto.getPrecioProducto();
