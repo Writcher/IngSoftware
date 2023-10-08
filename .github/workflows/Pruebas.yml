@@ -60,6 +60,7 @@ jobs:
           distribution: 'temurin'
       - name: Debug Info
         run: ls
+        working-directory: ${{ github.workspace }}
       - name: Compilar codigo
         run: javac Main.java
         working-directory: ${{ github.workspace }}
