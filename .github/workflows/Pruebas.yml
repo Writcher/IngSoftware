@@ -17,13 +17,12 @@ jobs:
       - uses: actions/checkout@v3 # v2 minimum required
       - uses: axel-op/googlejavaformat-action@v3             
         with:                                                
-          args: "--skip-sorting-imports --replace"     
+          args: "--skip-sorting-imports --replace"  
+          skip-commit: true
           github-token: ${{ secrets.GITHUB_TOKEN }}
           
   utesting:
     runs-on: ubuntu-latest
-    needs:
-    - checkformat
     steps:
     - name: Copiar codigo #Procura una copia del codigo que se encuentra en el repositorio sobre la cual trabajar en el workflow.
       uses: actions/checkout@v2
@@ -39,8 +38,6 @@ jobs:
 
   checkstyle:
     runs-on: ubuntu-latest
-    needs:
-    - checkformat
     steps:
     - name: Copiar codigo
       uses: actions/checkout@v2
@@ -56,8 +53,6 @@ jobs:
 
   build:
     runs-on: ubuntu-latest
-    needs:
-      - checkformat
     steps:
       - name: Copiar codigo
         uses: actions/checkout@v2
