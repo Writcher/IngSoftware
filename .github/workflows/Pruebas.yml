@@ -72,8 +72,13 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
+      - name: Debug Info
+        run: |
+          pwd
+          ls
+
       - name: Compilar codigo
-        run: javac ./Main.java
+        run: javac Main.java
 
       - name: Ejecutar codigo
-        run: java ./Main
+        run: java Main
