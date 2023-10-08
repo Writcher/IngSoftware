@@ -16,7 +16,6 @@ public class JavaTest {
     double precio = producto.getPrecioProducto();
     assertEquals(10.0, precio, 0.0);
   }
-
   public void testDecimalesProductoPrecio() {
     Producto producto = new Producto();
     producto.setPrecioProducto(20.00);
