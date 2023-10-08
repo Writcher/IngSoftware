@@ -29,10 +29,7 @@ jobs:
     
     - name: Ejecutar las pruebas #Ejecuta las pruebas unitarias de la clase JavaTest.
       run: java -cp .:lib/junit-4.13.2.jar:lib/hamcrest-core-1.3.jar org.junit.runner.JUnitCore JavaTest
-      
-    - name: Mensaje de Listo 
-      run: echo "Listas las pruebas maestro!!"
-#A partir de aca es nuevo
+
   checkstyle:
     runs-on: ubuntu-latest
 
@@ -46,17 +43,36 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
           
-      - name: Ejecutar Checkstyle
-        run: |
+      - name: Ejecutar Checkstyle     #Ejecuta checkstyle con el script run_checkstyle.sh (No es completamente necesario hacer un script, pero
+        run: |                        #ya lo habia escrito antes de darme cuenta por lo que lo use de todas formas, pa no desperdiciar
           chmod +x ./checkstyle/run_checkstyle.sh
           ./checkstyle/run_checkstyle.sh
-#Hasta aca anda!
+
   checkformat:
     runs-on: ubuntu-latest
       
     steps: 
-     - uses: actions/checkout@v3 # v2 minimum required
-     - uses: axel-op/googlejavaformat-action@v3
-       with:
-           args: "--skip-sorting-imports --replace"
+     - name: Copiar codigo
+       uses: actions/checkout@v3 # v2 minimum required
+
+     - name: Usamos la Github Action Google Java Format     #Llamamos la action Google Java Format para que verifique el formato de todos los archivos
+       uses: axel-op/googlejavaformat-action@v3             #del repositorio que tengan laa extension .java, y en caso de que no esten en formato
+       with:                                                #correcto, el action los modifica dandoles formato y crea un commit nuevo con los archivos
+           args: "--skip-sorting-imports --replace"         #ahora en formato correcto.
            github-token: ${{ secrets.GITHUB_TOKEN }}
+#Hasta aca anda!
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Preparar JDK
+        uses: actions/setup-java@v2
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Compilar codigo
+        run: javac Main.java
+
+      - name: Ejecutar codigo
+        run: java Main
