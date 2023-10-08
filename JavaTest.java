@@ -5,7 +5,6 @@ public class JavaTest {
   @Test
   public void testNombreProducto() {
     Producto producto = new Producto("Remera");
-
     String nombre = producto.getNombreProducto();
     assertNotNull(nombre);
     assertFalse(nombre.isEmpty());
