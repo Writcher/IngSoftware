@@ -3,7 +3,7 @@ on:
   workflow_dispatch: #Esto nos permite ejecutar el workflow desde el menu actions de github.
 
 jobs:
-  checkformat:
+  reformat:
     runs-on: ubuntu-latest
     steps: 
       - uses: actions/checkout@v3 # v2 minimum required
