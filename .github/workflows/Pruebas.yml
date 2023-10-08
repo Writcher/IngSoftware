@@ -52,14 +52,15 @@ jobs:
     runs-on: ubuntu-latest
       
     steps: 
-     - name: Copiar codigo
-       uses: actions/checkout@v3 # v2 minimum required
-
-     - name: Usamos la Github Action Google Java Format     #Llamamos la action Google Java Format para que verifique el formato de todos los archivos
-       uses: axel-op/googlejavaformat-action@v3             #del repositorio que tengan laa extension .java, y en caso de que no esten en formato
-       with:                                                #correcto, el action los modifica dandoles formato y crea un commit nuevo con los archivos
-           args: "--skip-sorting-imports --replace"         #ahora en formato correcto.
-           github-token: ${{ secrets.GITHUB_TOKEN }}
+      - uses: actions/checkout@v3 # v2 minimum required
+      - uses: axel-op/googlejavaformat-action@v3             
+        with:                                                
+          args: "--skip-sorting-imports --replace"        
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+            #Llamamos la action Google Java Format para que verifique el formato de todos los archivos
+            #del repositorio que tengan laa extension .java, y en caso de que no esten en formato
+            #correcto, el action los modifica dandoles formato y crea un commit nuevo con los archivos
+            #ahora en formato correcto.
 #Hasta aca anda!
   build:
     runs-on: ubuntu-latest
@@ -72,7 +73,7 @@ jobs:
           distribution: 'temurin'
 
       - name: Compilar codigo
-        run: javac Main.java
+        run: javac ./Main.java
 
       - name: Ejecutar codigo
-        run: java Main
+        run: java ./Main
