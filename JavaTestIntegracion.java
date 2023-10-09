@@ -9,6 +9,7 @@ public class JavaTestIntegracion {
             double cantPesos = 1000;
             double cantUSD = convertidor.convertirARSaUSD(cantPesos);
             assertTrue(cantUSD > 0);
+            
         }catch (Exception e){ 
             e.printStackTrace();
         }
