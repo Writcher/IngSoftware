@@ -1,4 +1,4 @@
-name: Pruebas
+name: Prueba Integracion
 
 on:
   workflow_dispatch: # Esto nos permite ejecutar el workflow desde el menú Actions de GitHub.
@@ -37,7 +37,6 @@ jobs:
 
     - name: Descargar dependencias
       run: |
-        mkdir lib
         wget https://path/to/okhttp3.jar -O lib/okhttp3.jar
         wget https://path/to/org.json.jar -O lib/org.json.jar
         wget https://path/to/hamcrest-core.jar -O lib/hamcrest-core.jar
