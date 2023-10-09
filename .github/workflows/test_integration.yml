@@ -1,4 +1,4 @@
-name: Pruebas
+name: Pruebas de Integracion
 
 on:
   workflow_dispatch: # Esto nos permite ejecutar el workflow desde el menú Actions de GitHub.
