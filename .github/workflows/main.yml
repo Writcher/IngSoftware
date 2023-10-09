@@ -1,0 +1,85 @@
+name: Pruebas
+
+on:
+  workflow_dispatch: # Esto nos permite ejecutar el workflow desde el menú Actions de GitHub.
+  push:              # Ejecuta el workflow cuando se hace un push en la branch main.
+    branches:
+      - main
+      - dev
+  pull_request:      # Ejecuta el workflow cuando se hace un pull request de la branch main.
+    branches:
+      - main
+      - dev
+
+jobs:
+  checkformat:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout código fuente
+        uses: actions/checkout@v3
+
+      - name: Verificar formato de código
+        uses: axel-op/googlejavaformat-action@v3
+        with:
+          skip-commit: true
+          
+  utesting:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Copiar código
+      uses: actions/checkout@v2
+
+    - name: Preparar JDK
+      uses: actions/setup-java@v2
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+
+    - name: Descargar dependencias
+      run: |
+        mkdir lib
+        wget https://path/to/okhttp3.jar -O lib/okhttp3.jar
+        wget https://path/to/org.json.jar -O lib/org.json.jar
+        wget https://path/to/hamcrest-core.jar -O lib/hamcrest-core.jar
+        wget https://path/to/junit.jar -O lib/junit.jar
+
+    - name: Compilar código
+      run: javac -cp .:lib/okhttp3.jar:lib/org.json.jar:lib/hamcrest-core.jar:lib/junit.jar JavaTestIntegracion.java
+
+    - name: Ejecutar las pruebas
+      run: java -cp .:lib/okhttp3.jar:lib/org.json.jar:lib/hamcrest-core.jar:lib/junit.jar org.junit.runner.JUnitCore JavaTestIntegracion
+
+  checkstyle:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Copiar código
+      uses: actions/checkout@v2
+
+    - name: Preparar JDK
+      uses: actions/setup-java@v2
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+
+    - name: Ejecutar Checkstyle
+      run: |
+        chmod +x ./checkstyle/run_checkstyle.sh
+        ./checkstyle/run_checkstyle.sh
+
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Copiar código
+        uses: actions/checkout@v2
+
+      - name: Preparar JDK
+        uses: actions/setup-java@v2
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Compilar código
+        run: javac -cp .:lib/okhttp3.jar:lib/org.json.jar:lib/hamcrest-core.jar:lib/junit.jar Main.java
+
+      - name: Ejecutar código
+        run: java -cp .:lib/okhttp3.jar:lib/org.json.jar:lib/hamcrest-core.jar:lib/junit.jar Main
