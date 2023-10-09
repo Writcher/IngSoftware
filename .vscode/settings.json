@@ -1,6 +1,4 @@
 {
-    
     "java.format.settings.url": "https://github.com/google/styleguide/raw/gh-pages/eclipse-java-google-style.xml",
     "java.format.settings.profile": "GoogleStyle"
-    
 }
