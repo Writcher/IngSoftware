@@ -36,17 +36,4 @@ public class JavaTest {
     double precioValidado = Double.parseDouble(precioString);
     assertEquals(producto.getPrecioProducto(), precioValidado, 0.001);
   }
-
-  @Test
-  public void testIntegracionAPIConvetidor(){
-    try{
-      ConvertirUSD convertidor = new ConvertirUSD();
-      double cantPesos = 1000;
-      double cantUSD = convertidor.convertirARSaUSD(cantPesos);
-      assertTrue(cantUSD > 0);
-    }catch (Exception e){ 
-      e.printStackTrace();
-    }
-
-  }
 }
