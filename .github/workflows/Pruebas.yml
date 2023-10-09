@@ -34,6 +34,24 @@ jobs:
     - name: Ejecutar las pruebas #Ejecuta las pruebas unitarias de la clase JavaTest.
       run: java -cp .:lib/* org.junit.runner.JUnitCore JavaTest
 
+  integrationtesting:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Copiar código
+      uses: actions/checkout@v2
+
+    - name: Preparar JDK
+      uses: actions/setup-java@v2
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+
+    - name: Compilar código
+      run: javac -cp .:lib/* JavaTestIntegracion.java
+
+    - name: Ejecutar las pruebas
+      run: java -cp .:lib/* org.junit.runner.JUnitCore JavaTestIntegracion
+  
   checkstyle:
     runs-on: ubuntu-latest
     steps:
